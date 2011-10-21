@@ -25,10 +25,9 @@ SLASH_SPINCAM1 = "/spincam";
 ---------------------------------------------------------------------------
 SetCVar("cameraYawMoveSpeed","230");
 local frame = CreateFrame("Frame");
-frame:RegisterEvent("ADDON_LOADED");
 frame:RegisterEvent("CHAT_MSG_SYSTEM");
 frame:RegisterEvent("PLAYER_ENTERING_WORLD");
-frame:SetScript("OnEvent",function(self,  event, arg1)
+frame:SetScript("OnEvent",function(self, event, arg1)
 	if event == "CHAT_MSG_SYSTEM" then
 		if (arg1 == format(MARKED_AFK_MESSAGE,DEFAULT_AFK_MESSAGE)) and (not SpinCamData.Disable) then
 			SetCVar("cameraYawMoveSpeed","8");
