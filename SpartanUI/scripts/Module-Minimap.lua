@@ -12,10 +12,12 @@ local updateButtons = function()
 		MinimapZoomIn:Hide();
 		MinimapZoomOut:Hide();
 		MiniMapWorldMapButton:Hide();
+		TimeManagerClockButton:Hide();
 	else
 		GameTimeFrame:Show();
 		MiniMapTracking:Show();
 		MiniMapWorldMapButton:Show();
+		TimeManagerClockButton:Show();
 	end
 end
 local modifyMinimapLayout = function()
