@@ -28,15 +28,15 @@ local modifyMinimapLayout = function()
 	
 	MinimapBackdrop:ClearAllPoints(); MinimapBackdrop:SetPoint("CENTER",frame,"CENTER",-10,-24);
 	MinimapZoneTextButton:SetParent(frame); MinimapZoneTextButton:ClearAllPoints(); MinimapZoneTextButton:SetPoint("TOP",frame,"BOTTOM",0,-6);
-	MinimapBorderTop:Hide(); MinimapBorder:SetAlpha(0);		
-	MinimapZoomIn:Hide(); MinimapZoomOut:Hide();	
+	MinimapBorderTop:Hide(); MinimapBorder:SetAlpha(0);
+	MinimapZoomIn:Hide(); MinimapZoomOut:Hide();
 	Minimap.overlay = Minimap:CreateTexture(nil,"OVERLAY");
-	Minimap.overlay:SetWidth(250); Minimap.overlay:SetHeight(250); 
+	Minimap.overlay:SetWidth(250); Minimap.overlay:SetHeight(250);
 	Minimap.overlay:SetTexture("Interface\\AddOns\\SpartanUI\\media\\map-overlay");
-	Minimap.overlay:SetPoint("CENTER"); Minimap.overlay:SetBlendMode("ADD");	
+	Minimap.overlay:SetPoint("CENTER"); Minimap.overlay:SetBlendMode("ADD");
 	
 	frame:EnableMouse(true);
-	frame:EnableMouseWheel(true);	
+	frame:EnableMouseWheel(true);
 	frame:SetScript("OnMouseWheel",function(_, arg1)
 		if (arg1 > 0) then Minimap_ZoomIn()
 		else Minimap_ZoomOut() end
@@ -60,14 +60,14 @@ local createMinimapCoords = function()
 			if IsInInstance() then map.coords:Hide() else map.coords:Show() end
 			if (WorldMapFrame:IsVisible()) then SetMapToCurrentZone(); end
 		elseif (event == "ADDON_LOADED") then
-			print(arg1);			
+			print(arg1);
 		end
 		local LastFrame = UIErrorsFrame;
 		for i = 1, NUM_EXTENDED_UI_FRAMES do
 			local bar = _G["WorldStateCaptureBar"..i];
-			if (bar and bar:IsShown()) then 			
+			if (bar and bar:IsShown()) then
 				bar:ClearAllPoints();
-				bar:SetPoint("TOP",LastFrame,"BOTTOM");			
+				bar:SetPoint("TOP",LastFrame,"BOTTOM");
 				LastFrame = self;
 			end
 		end
@@ -75,11 +75,11 @@ local createMinimapCoords = function()
 	map:RegisterEvent("ZONE_CHANGED");
 	map:RegisterEvent("ZONE_CHANGED_INDOORS");
 	map:RegisterEvent("ZONE_CHANGED_NEW_AREA");
-	map:RegisterEvent("UPDATE_WORLD_STATES");	
-	map:RegisterEvent("UPDATE_BATTLEFIELD_SCORE");	
+	map:RegisterEvent("UPDATE_WORLD_STATES");
+	map:RegisterEvent("UPDATE_BATTLEFIELD_SCORE");
 	map:RegisterEvent("PLAYER_ENTERING_WORLD");
 	map:RegisterEvent("PLAYER_ENTERING_BATTLEGROUND");
-	map:RegisterEvent("WORLD_STATE_UI_TIMER_UPDATE");	
+	map:RegisterEvent("WORLD_STATE_UI_TIMER_UPDATE");
 end
 ---------------------------------------------------------------------------
 function module:OnInitialize()
@@ -101,8 +101,8 @@ function module:OnEnable()
 	if (checkThirdParty()) then return; end
 	modifyMinimapLayout();
 	createMinimapCoords();
-	LFDSearchStatus:ClearAllPoints();
-	LFDSearchStatus:SetPoint("BOTTOM",SpartanUI,"TOP",0,100);
+	LFGSearchStatus:ClearAllPoints();
+	LFGSearchStatus:SetPoint("BOTTOM",SpartanUI,"TOP",0,100);
 	ConsolidatedBuffs:ClearAllPoints();
-	ConsolidatedBuffs:SetPoint("TOPRIGHT",-13,-13);	
+	ConsolidatedBuffs:SetPoint("TOPRIGHT",-13,-13);
 end
