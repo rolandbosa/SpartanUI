@@ -46,14 +46,16 @@ do -- ClassIcon as an oUF module
 end
 
 do -- AFK / DND status text, as an oUF module
-	if not oUF.Tags['afkdnd'] then
-		oUF.Tags['afkdnd'] = function(unit)
-			if unit then
-				return UnitIsAFK(unit) and "AFK" or UnitIsDND(unit) and "DND" or "";
-			end
-		end;
-		oUF.TagEvents['afkdnd'] = "PLAYER_FLAGS_CHANGED PLAYER_TARGET_CHANGED UNIT_TARGET";
-	end
+   -- updated for oUF 1.6.0
+   if not oUF.Tags.Methods['afkdnd'] then
+      oUF.Tags.Methods['afkdnd'] =
+         function(unit)
+            if unit then
+               return UnitIsAFK(unit) and "AFK" or UnitIsDND(unit) and "DND" or "";
+            end
+         end;
+      oUF.Tags.Events['afkdnd'] = "PLAYER_FLAGS_CHANGED PLAYER_TARGET_CHANGED UNIT_TARGET";
+   end
 end
 
 do -- Level Skull as an oUF module
