@@ -12,20 +12,22 @@ local updateButtons = function()
 		MinimapZoomIn:Hide();
 		MinimapZoomOut:Hide();
 		MiniMapWorldMapButton:Hide();
+		TimeManagerClockButton:Hide();
 	else
 		GameTimeFrame:Show();
 		MiniMapTracking:Show();
 		MiniMapWorldMapButton:Show();
+		TimeManagerClockButton:Show();
 	end
 end
 local modifyMinimapLayout = function()
 	frame = CreateFrame("Frame",nil,SpartanUI);
 	frame:SetWidth(158); frame:SetHeight(158);
 	frame:SetPoint("CENTER",0,54);
-
+	
 	Minimap:SetParent(frame); Minimap:SetWidth(158); Minimap:SetHeight(158);
 	Minimap:ClearAllPoints(); Minimap:SetPoint("CENTER");
-
+	
 	MinimapBackdrop:ClearAllPoints(); MinimapBackdrop:SetPoint("CENTER",frame,"CENTER",-10,-24);
 	MinimapZoneTextButton:SetParent(frame); MinimapZoneTextButton:ClearAllPoints(); MinimapZoneTextButton:SetPoint("TOP",frame,"BOTTOM",0,-6);
 	MinimapBorderTop:Hide(); MinimapBorder:SetAlpha(0);
@@ -34,7 +36,7 @@ local modifyMinimapLayout = function()
 	Minimap.overlay:SetWidth(250); Minimap.overlay:SetHeight(250);
 	Minimap.overlay:SetTexture("Interface\\AddOns\\SpartanUI\\media\\map-overlay");
 	Minimap.overlay:SetPoint("CENTER"); Minimap.overlay:SetBlendMode("ADD");
-
+	
 	frame:EnableMouse(true);
 	frame:EnableMouseWheel(true);
 	frame:SetScript("OnMouseWheel",function(_, arg1)
