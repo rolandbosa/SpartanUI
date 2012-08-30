@@ -17,7 +17,7 @@ local updateSpartanScale = function() -- scales SpartanUI based on setting or sc
 		else suiChar.scale = 0.78; end
 	end
 	updateMinimumScale();
-	if (suiChar.scale ~= round(SpartanUI:GetScale())) then	
+	if (suiChar.scale ~= round(SpartanUI:GetScale())) then
 		frame:SetScale(suiChar.scale);
 	end
 end;
@@ -53,7 +53,7 @@ function module:OnInitialize()
 		MainMenuBar:Hide();
 		hooksecurefunc(UIParent,"Hide",function() WorldFrame:SetPoint("BOTTOMRIGHT"); end);
 		hooksecurefunc(UIParent,"Show",function()  updateSpartanViewport(); end);
-		hooksecurefunc("updateContainerFrameAnchors",function() -- fix bag offsets
+		hooksecurefunc("UpdateContainerFrameAnchors",function() -- fix bag offsets
 			local frame, xOffset, yOffset, screenHeight, freeScreenHeight, leftMostPoint, column
 			local screenWidth = GetScreenWidth()
 			local containerScale = 1
@@ -126,7 +126,7 @@ function module:OnInitialize()
 		type = "execute", name = "Toggle Default Scales",
 		desc = "toggles between widescreen and standard scales",
 		func = function()
-			if (InCombatLockdown()) then 
+			if (InCombatLockdown()) then
 				addon:Print(ERR_NOT_IN_COMBAT);
 			else
 				if (suiChar.scale >= 0.92) or (suiChar.scale < 0.78) then
@@ -142,7 +142,7 @@ function module:OnInitialize()
 		type = "range", name = "Configure Scale",
 		desc = "sets a specific scale for SpartanUI",
 		set = function(info,val)
-			if (InCombatLockdown()) then 
+			if (InCombatLockdown()) then
 				addon:Print(ERR_NOT_IN_COMBAT);
 			else
 				suiChar.scale = min(1,round(val));
@@ -157,7 +157,7 @@ function module:OnInitialize()
 		name = "Configure Offset",
 		desc = "offsets the bottom bar automatically, or on a set value",
 		set = function(info,val)
-			if (InCombatLockdown()) then 
+			if (InCombatLockdown()) then
 				addon:Print(ERR_NOT_IN_COMBAT);
 			else
 				if (val == "") or (val == "auto") then
@@ -166,8 +166,8 @@ function module:OnInitialize()
 				else
 					val = tonumber(val);
 					if (type(val) == "number") then
-						val = max(0,val);						
-						suiChar.offset = max(val+1,1);					
+						val = max(0,val);
+						suiChar.offset = max(val+1,1);
 						addon:Print("Panel Offset set to "..val);
 					end
 				end
@@ -179,7 +179,7 @@ end
 function module:OnEnable()
 	anchor:SetFrameStrata("BACKGROUND"); anchor:SetFrameLevel(1);
 	frame:SetFrameStrata("BACKGROUND"); frame:SetFrameLevel(1);
-	
+
 	hooksecurefunc("AchievementAlertFrame_ShowAlert",function() -- achivement alerts
 		if (AchievementAlertFrame1) then AchievementAlertFrame1:SetPoint("BOTTOM",UIParent,"CENTER"); end
 	end);
@@ -196,11 +196,11 @@ function module:OnEnable()
 		CastingBarFrame:SetPoint("BOTTOM",frame,"TOP",0,90);
 	end);
 	hooksecurefunc("ToggleBattlefieldMinimap",updateBattlefieldMinimap);
-	
+
 	updateSpartanScale();
 	updateSpartanOffset();
 	updateSpartanViewport();
-	
+
 	anchor:SetScript("OnUpdate",function()
 		if (InCombatLockdown()) then return; end
 		updateSpartanScale();

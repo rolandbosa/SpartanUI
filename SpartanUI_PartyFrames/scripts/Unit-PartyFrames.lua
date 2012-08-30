@@ -28,11 +28,11 @@ do -- scripts to make it movable
 	party.mover:SetWidth(205); party.mover:SetHeight(332);
 	party.mover:SetPoint("TOPLEFT",party,"TOPLEFT");
 	party.mover:EnableMouse(true);
-	
+
 	party.bg = party.mover:CreateTexture(nil,"BACKGROUND");
 	party.bg:SetAllPoints(party.mover);
 	party.bg:SetTexture(1,1,1,0.5);
-	
+
 	party.mover:SetScript("OnMouseDown",function()
 		party.isMoving = true;
 		suiChar.PartyFrames.partyMoved = true;
@@ -64,7 +64,7 @@ do -- scripts to make it movable
 	end);
 	party.mover:RegisterEvent("VARIABLES_LOADED");
 	party.mover:RegisterEvent("PLAYER_REGEN_DISABLED");
-	
+
 	addon.offset = 0;
 	function addon:updatePartyOffset() -- handles SpartanUI offset based on setting or fubar / titan
 		local fubar,titan,offset = 0,0;
@@ -96,7 +96,7 @@ do -- scripts to make it movable
 		offset = max(fubar + titan,1);
 		return offset;
 	end
-	
+
 	function addon:UpdatePartyPosition()
 		-- Debug
 --		print("update")
@@ -134,8 +134,8 @@ do -- hide party frame in raid, if option enabled
 --		print('event '..event)
 --		print(...)
 
-		local inRaid = ( GetNumRaidMembers() > 0 )
-		local inParty = ( GetNumPartyMembers() > 0 )
+        local inRaid = UnitInRaid("player")
+		local inParty = ( GetNumGroupMembers() > 0 )
 
 		local HideInRaid = suiChar.PartyFrames.HidePartyInRaid;
 		if HideInRaid == 1 then party:SetAttribute('showRaid',false) end
@@ -167,7 +167,7 @@ do -- hide party frame in raid, if option enabled
 		end
 		if ( addon.offset ~= addon:updatePartyOffset() ) then addon:UpdatePartyPosition() end
 	end
-	
+
 	local partyWatch = CreateFrame("Frame");
 	partyWatch:RegisterEvent('PLAYER_LOGIN');
 	partyWatch:RegisterEvent('PLAYER_ENTERING_WORLD');

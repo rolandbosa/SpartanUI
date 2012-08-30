@@ -6,7 +6,8 @@ oUF:SetActiveStyle("Spartan_PlayerFrames");
 addon.player = oUF:Spawn("player","SUI_PlayerFrame");
 addon.player:SetPoint("BOTTOMRIGHT",SpartanUI,"TOP",-72,-3);
 
-do -- relocate the warlock ShardBar
+local _,class = UnitClass("player")
+if class == "WARLOCK" then -- relocate the warlock ShardBar
 	hooksecurefunc(ShardBarFrame,"SetPoint",function(_,_,parent)
 		if (parent ~= addon.player) then
 			ShardBarFrame:ClearAllPoints();
@@ -18,7 +19,7 @@ do -- relocate the warlock ShardBar
 	ShardBarFrame:SetPoint("TOPLEFT",addon.player,"TOPLEFT",2,-2);
 end
 
-do -- relocate the druid EclipseBar
+if class == "DRUID" then -- relocate the druid EclipseBar
 	hooksecurefunc(EclipseBarFrame,"SetPoint",function(_,_,parent)
 		if (parent ~= addon.player) then
 			EclipseBarFrame:ClearAllPoints();
@@ -42,7 +43,7 @@ do -- relocate the AlternatePowerBar
 	PlayerFrameAlternateManaBar:SetPoint("TOPLEFT",addon.player,"BOTTOMLEFT",32,2);
 end
 
-do -- relocate the paladin PaladinPowerBar
+if class == "PALADIN" then -- relocate the paladin PaladinPowerBar
 	hooksecurefunc(PaladinPowerBar,"SetPoint",function(_,_,parent)
 		if (parent ~= addon.player) then
 			PaladinPowerBar:ClearAllPoints();
@@ -54,7 +55,7 @@ do -- relocate the paladin PaladinPowerBar
 	PaladinPowerBar:SetPoint("TOPLEFT",addon.player,"BOTTOMLEFT",60,14);
 end
 
-do -- relocate the death knight RuneFrame
+if class == "DEATHKNIGHT" then -- relocate the death knight RuneFrame
 	hooksecurefunc(RuneFrame,"SetPoint",function(_,_,parent)
 		if (parent ~= addon.player) then
 			RuneFrame:ClearAllPoints();
@@ -66,7 +67,7 @@ do -- relocate the death knight RuneFrame
 	RuneFrame:SetPoint("TOPLEFT",addon.player,"BOTTOMLEFT",40,10);
 end
 
-do -- relocate the shaman TotemFrame
+if class == "SHAMAN" then -- relocate the shaman TotemFrame
 	for i = 1,4 do
 		local timer = _G["TotemFrameTotem"..i.."Duration"];
 		timer.Show = function() return; end
@@ -152,19 +153,19 @@ end
 local OnLeave = function(self)
 	GameTooltip:Hide();
 end
-	
+
 	LFDCooldown = CreateFrame("Frame",nil,addon.player)
 	LFDCooldown:SetFrameStrata("BACKGROUND")
 	LFDCooldown:SetFrameLevel(10);
-	LFDCooldown:SetWidth(38) -- Set these to whatever height/width is needed 
+	LFDCooldown:SetWidth(38) -- Set these to whatever height/width is needed
 	LFDCooldown:SetHeight(38) -- for your Texture
-	
+
 	local t = LFDCooldown:CreateTexture(nil,"BACKGROUND")
 --	t:SetTexture("Interface\\LFGFrame\\BattlenetWorking19.blp")
 	t:SetTexture("Interface\\LFGFrame\\LFG-Eye.blp")
 	t:SetAllPoints(LFDCooldown)
 	LFDCooldown.texture = t
-	
+
 	local txt = LFDCooldown:CreateFontString(nil, "OVERLAY", "SUI_FontOutline18");
 	txt:SetWidth(14);
 	txt:SetHeight(22);
@@ -175,7 +176,7 @@ end
 	txt:SetPoint("BOTTOMRIGHT", LFDCooldown ,"BOTTOMRIGHT", 0, 0)
 	LFDCooldown.text = txt
 	LFDCooldown.text:SetText""
-	
+
 --	LFDCooldown.myExpirationTime = "";
 	LFDCooldown:SetPoint("CENTER",addon.player,"CENTER",85,-30)
 	LFDCooldown:RegisterEvent("PLAYER_ENTERING_WORLD");
