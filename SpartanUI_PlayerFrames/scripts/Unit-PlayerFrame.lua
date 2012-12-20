@@ -14,7 +14,7 @@ if class == "WARLOCK" then -- relocate the warlock ShardBar
 			ShardBarFrame:SetPoint("TOPLEFT",addon.player,"BOTTOMLEFT",2,-2);
 		end
 	end);
-	ShardBarFrame:SetParent(addon.player); ShardBar_OnLoad(ShardBarFrame); ShardBarFrame:SetFrameStrata("MEDIUM");
+	ShardBarFrame:SetParent(addon.player); WarlockPowerFrame_OnLoad(ShardBarFrame); ShardBarFrame:SetFrameStrata("MEDIUM");
 	ShardBarFrame:SetFrameLevel(4); ShardBarFrame:SetScale(1); ShardBarFrame:ClearAllPoints();
 	ShardBarFrame:SetPoint("TOPLEFT",addon.player,"TOPLEFT",2,-2);
 end
